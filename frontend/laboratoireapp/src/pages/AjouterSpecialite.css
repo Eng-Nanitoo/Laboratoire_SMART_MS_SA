@@ -1,0 +1,45 @@
+.container-ajouter-specialite {
+    padding: 20px;
+}
+.container-ajouter-specialite > h2 {
+    color: rgba(6, 28, 73, 1);
+    margin-bottom: 20px;
+}
+
+.container-ajouter-specialite .ajouter-specialite-form .input-label {
+    margin-block: 10px;
+}
+.container-ajouter-specialite .ajouter-specialite-form .input-label label {
+    color: rgba(6, 28, 73, 1);
+}
+.container-ajouter-specialite .ajouter-specialite-form .input-label input,.container-ajouter-specialite .ajouter-specialite-form .input-label textarea {
+    margin-block: 10px;
+    border: 1px solid #e8e8e8;
+    padding: 5px 10px;
+    display: block;
+    color: #444;
+    font-size: 14px;
+    border-radius: 5px;
+    width: 60%;
+}
+
+.container-ajouter-specialite .ajouter-specialite-form .input-label textarea {
+    min-height: 100px;
+    max-height: 100px;
+}
+.container-ajouter-specialite .submit-button {
+    margin-block: 20px;
+    display: flex;
+    justify-content: end;
+}
+.container-ajouter-specialite .submit-button button {
+    cursor: pointer;
+    padding: 5px 10px;
+    background-color: var(--secondary-color);
+}
+.container-ajouter-specialite .ajouter-specialite-form .choice {
+    font-size: 14px;
+}
+.container-ajouter-specialite .ajouter-specialite-form .choice input {
+    margin: 10px 10px 5px 0;
+}

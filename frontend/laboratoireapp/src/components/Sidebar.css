@@ -1,0 +1,26 @@
+.sidebar{
+    grid-area: aside;
+    min-height: 100vh;
+    background-color: var(--main-color);
+    width: 180px;
+    padding-inline: 20px;
+}
+
+.sidebar .logo{
+    margin-bottom: 40px;
+    margin-inline: auto;
+}
+
+.sidebar *{
+    color: #fff;
+}
+
+.sidebar .links a{
+    margin-block: 25px;
+    font-family: 'Montserrat';
+    text-decoration: none;
+    text-align: center;
+}
+.sidebar .links a i{
+    display: block;
+}

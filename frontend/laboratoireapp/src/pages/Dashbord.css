@@ -1,0 +1,97 @@
+.container-dashbord{
+    min-width: 100%;
+    grid-template-areas: 
+    "overview overview overview patient-record patient-record"
+    "overview overview overview patient-record patient-record"
+    "specialites specialites specialites patient-record patient-record"
+    "labaoratory labaoratory labaoratory tasks tasks"
+    "labaoratory labaoratory labaoratory tasks tasks"
+    "tests tests tests calendar calendar"
+    "tests tests tests calendar calendar"
+    "tests tests tests calendar calendar"
+    ;
+}
+.overview{
+    padding: 10px;
+    grid-area: overview;
+    background-color: var(--secondary-color);
+    border-radius: 9px;
+}
+.specialites{
+    grid-area: specialites;
+}
+.patient-record{
+    padding: 10px;
+    grid-area: patient-record; 
+}
+.patient-record-content{
+    background-blend-mode:difference;
+    background-image: url('../assets/LaboImage.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+
+}
+.patient-record .content{
+    padding: 25px;
+    height: 100%;
+    background-color: rgba(27, 74, 137, 0.75);
+}
+.patient-record .content p{
+    margin: 10px 0 20px 0;
+}
+.patient-record .content a{
+    color: var(--secondary-color);
+    padding: 5px;
+}
+.specialite {
+    padding: 10px;
+}
+.specialite-logo{
+    padding: 5px;
+}
+.labaoratory{
+    padding: 15px;
+    grid-area: labaoratory;
+}
+.labaoratory p{
+    margin-bottom: 15px;
+}
+.labaoratory .test-template-link{
+    padding: 5px;
+    background-color: var(--secondary-color);
+}
+.labaoratory .labo-icon {
+    padding: 5px;
+    background-color: var(--secondary-color);
+}
+.tasks{
+    padding: 15px;
+    grid-area: tasks;
+}
+.tasks .tasks-header {
+    margin-bottom: 15px;
+}
+.tasks .tasks-header .tasks-header-title{
+    color: var(--secondary-color);
+}
+.tasks .tasks-header a{
+    background-color: var(--secondary-color);
+    padding: 5px;
+}
+.tests{
+    grid-area: tests;
+    padding: 10px;
+}
+.tests-latest-title{
+    color: var(--secondary-color);
+    margin-bottom: 10px;
+}
+.tests table tr th{
+    margin-bottom: 10px;
+}
+.calendar{
+    grid-area: calendar;
+    background-color: var(--secondary-color);
+
+}

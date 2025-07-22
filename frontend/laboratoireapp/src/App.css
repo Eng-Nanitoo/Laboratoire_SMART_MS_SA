@@ -1,0 +1,33 @@
+@import "tailwindcss";
+
+/*Define The Application Colors*/
+:root{
+    --main-color: rgba(74, 124, 176, 1);
+    --secondary-color: rgba(85, 133, 181, 1);
+    --background-color: rgba(246, 249, 252, 1);
+}
+
+/* CSS Reset */
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    outline: none;
+    border: none;
+}
+
+body{
+    
+    min-height: 100vh;
+    background-color: var(--background-color);
+}
+
+.container{
+    display: grid;
+    grid-template-areas: 
+    "aside header header header header header"
+    "aside main main main main main"
+    "aside main main main main main"
+    "aside main main main main main"
+    ;
+}

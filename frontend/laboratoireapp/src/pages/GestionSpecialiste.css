@@ -1,0 +1,11 @@
+.specialiste-table table {
+    border-radius: 10px;
+}
+.specialiste-table table thead{
+    height: 40px;
+    background-color: rgba(74, 124, 177, 1);
+}
+.specialiste-table table td {
+    text-align: center;
+    place-items: center;
+}

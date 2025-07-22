@@ -1,0 +1,36 @@
+.container-gestion-analyse{
+    padding: 20px;
+    
+}
+.container-gestion-analyse > h2{
+    color: rgba(6, 28, 73, 1);
+    margin-bottom: 20px;
+}
+.container-gestion-analyse .gestion-analyse-table{
+    margin-top: 20px;
+}
+.container-gestion-analyse .gestion-analyse-table table{
+    width: 100%;
+    background-color: white;
+    border-radius: 5px;
+}
+.container-gestion-analyse .gestion-analyse-table table thead{
+    background-color: var(--main-color);
+    color: white;
+}
+.container-gestion-analyse .gestion-analyse-table table thead th{
+    padding: 10px;
+    
+}
+.container-gestion-analyse .gestion-analyse-table table tbody{
+    background-color: white;
+}
+.container-gestion-analyse .gestion-analyse-table table tbody tr{
+    border-bottom: 1px solid #e8e8e8;
+}
+.container-gestion-analyse .gestion-analyse-table table tbody tr td{
+    padding: 10px;
+    font-size: 14px;
+}
+
+

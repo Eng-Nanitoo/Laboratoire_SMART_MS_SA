@@ -1,0 +1,47 @@
+.container-ajouter-utilisateur {
+    padding: 20px;
+}
+.container-ajouter-utilisateur > h2 {
+    color: rgba(6, 28, 73, 1);
+    margin-bottom: 20px;
+}
+
+.container-ajouter-utilisateur .ajouter-utilisateur-form {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+}
+.container-ajouter-utilisateur .ajouter-utilisateur-form .input-label {
+    margin-block: 10px;
+}
+.container-ajouter-utilisateur .ajouter-utilisateur-form .input-label label {
+    color: rgba(6, 28, 73, 1);
+}
+.container-ajouter-utilisateur .ajouter-utilisateur-form .input-label input {
+    margin-block: 10px;
+    border: 1px solid #e8e8e8;
+    padding: 5px 10px;
+    display: block;
+    color: #444;
+    font-size: 14px;
+    border-radius: 5px;
+}
+
+.container-ajouter-utilisateur .submit-button{
+    margin-block: 20px;
+    display: flex;
+    justify-content: end;
+}
+.container-ajouter-utilisateur .submit-button button{
+    cursor: pointer;
+    padding: 5px 10px;
+    background-color: var(--secondary-color);
+}
+
+.container-ajouter-utilisateur .ajouter-utilisateur-form .choice{
+    font-size: 14px;
+}
+
+.container-ajouter-utilisateur .ajouter-utilisateur-form .choice input{
+
+    margin: 10px 10px 5px 0;
+}

@@ -1,0 +1,35 @@
+.container-gestion-demande{
+    padding: 20px;
+}
+.container-gestion-demande > h2{
+    color: rgba(6, 28, 73, 1);
+    margin-bottom: 20px;
+}
+.container-gestion-demande .gestion-demande-table{
+    margin-top: 20px;
+}
+.container-gestion-demande .gestion-demande-table table{
+    width: 100%;
+    background-color: white;
+    border-radius: 5px;
+}
+.container-gestion-demande .gestion-demande-table table thead{
+    background-color: var(--main-color);
+    color: white;
+}
+.container-gestion-demande .gestion-demande-table table thead th{
+    padding: 10px;
+    
+}
+.container-gestion-demande .gestion-demande-table table tbody{
+    background-color: white;
+}
+.container-gestion-demande .gestion-demande-table table tbody tr{
+    border-bottom: 1px solid #e8e8e8;
+}
+.container-gestion-demande .gestion-demande-table table tbody tr td{
+    padding: 10px;
+    font-size: 14px;
+}
+
+

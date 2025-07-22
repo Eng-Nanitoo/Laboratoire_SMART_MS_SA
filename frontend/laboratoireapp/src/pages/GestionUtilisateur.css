@@ -1,0 +1,39 @@
+.container-gestion-utilisateur{
+    font-family: 'poppins';
+}
+.container-gestion-utilisateur > h1{
+    margin-bottom: 20px;
+}
+
+.container-gestion-utilisateur .gestion-utilisateur-table table{
+    padding: 20px;
+}
+.container-gestion-utilisateur .gestion-utilisateur-table{
+    margin-top: 10px;
+}
+.container-gestion-utilisateur .gestion-utilisateur-table table thead{
+    border-radius: 10px;
+    height: 45px;
+    background-color: rgba(74, 124, 177, 1);
+    color: #fff;
+}
+tr{
+    transition: .2s;
+}
+td{
+    cursor: pointer;
+    place-items: center;
+    text-align: center;
+    height: 45px;
+    
+}
+tbody tr:hover{
+    background-color: #e8e8e8;
+}
+.add-specialite-button{
+    padding: 5px;
+    color: rgba(74, 124, 177, 1);
+}
+.gestion-specialiste-header{
+    margin-block: 10px;
+}
