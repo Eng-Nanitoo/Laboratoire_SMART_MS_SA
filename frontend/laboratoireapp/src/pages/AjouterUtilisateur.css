@@ -16,7 +16,7 @@
 .container-ajouter-utilisateur .ajouter-utilisateur-form .input-label label {
     color: rgba(6, 28, 73, 1);
 }
-.container-ajouter-utilisateur .ajouter-utilisateur-form .input-label input {
+.container-ajouter-utilisateur .ajouter-utilisateur-form .input-label input,.container-ajouter-utilisateur .ajouter-utilisateur-form .input-label select {
     margin-block: 10px;
     border: 1px solid #e8e8e8;
     padding: 5px 10px;
@@ -24,6 +24,8 @@
     color: #444;
     font-size: 14px;
     border-radius: 5px;
+    
+    
 }
 
 .container-ajouter-utilisateur .submit-button{
@@ -44,4 +46,63 @@
 .container-ajouter-utilisateur .ajouter-utilisateur-form .choice input{
 
     margin: 10px 10px 5px 0;
+}
+
+.container-ajouter-utilisateur .input-label {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.container-ajouter-utilisateur .input-label input,
+.container-ajouter-utilisateur .input-label select {
+    padding: 0.5rem;
+    border: 1px solid #e2e8f0;
+    border-radius: 0.25rem;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.container-ajouter-utilisateur .input-label input:focus,
+.container-ajouter-utilisateur .input-label select:focus {
+    border-color: #3b82f6;
+}
+
+.container-ajouter-utilisateur .input-label input.border-red-500,
+.container-ajouter-utilisateur .input-label select.border-red-500 {
+    border-color: #ef4444;
+}
+
+.permissions {
+    margin-top: 0.5rem;
+}
+
+.role-options .choice {
+    display: flex;
+    align-items: center;
+    border-radius: 0.25rem;
+}
+
+.analyse-types {
+    margin-top: 1rem;
+}
+
+.analyses-list {
+    max-height: 200px;
+    overflow-y: auto;
+    padding: 0.5rem;
+    border: 1px solid #e5e7eb;
+    border-radius: 0.25rem;
+}
+
+.submit-button button {
+    background-color: #3b82f6;
+    transition: background-color 0.2s;
+}
+
+
+
+.submit-button button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
 }

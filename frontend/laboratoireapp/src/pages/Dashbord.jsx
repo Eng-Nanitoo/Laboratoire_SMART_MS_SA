@@ -1,34 +1,49 @@
-import React from 'react'
+import React, { useState,useEffect } from 'react'
 import './Dashbord.css'
 import Logo from '../assets/LaboImage.jpg';
 import Calendar from '../components/Calendar';
+import api from '../api/api';
+import Loading from '../components/Loading';
+
 
 function Dashbord() {
+    const [overview, setOverview] = useState({})
+    const [isLoading, setIsLoading] = useState(true)
+    const [error, setError] = useState(null)
+
+    useEffect(() => {
+        const fetchOverview = async () => {
+            try {
+                setIsLoading(true)
+                const response = await api.get('/overview')
+                setOverview(response.data)
+                console.log(overview)
+                
+            } catch (error) {
+                console.error('Error fetching overview:', error)
+                setError(error.message)
+            } finally {
+                setIsLoading(false)
+            }
+        }
+
+        fetchOverview()
+    }, [])
+
     return (
         <div className='container-dashbord grid grid-cols-5 gap-8'>
             <section className="overview bg-white">
                 <h3 className="opacity-[.7] text-white">Overview</h3>
+                    {isLoading && <p className='w-full text-white text-sm'>Data will be available soon ....</p>}
+                    {error && <p className='w-full text-white text-sm'>Oups Something Went Wrong Please Try Again Later....</p>}
                 <div className="statistiques grid grid-cols-5">
-                    <div className='text-center text-white'>
-                        <h2 className='font-bold'>12</h2>
-                        <p className='font-medium'>Spécialités</p>
-                    </div>
-                    <div className='text-center text-white'>
-                        <h2 className='font-bold'>12</h2>
-                        <p className='font-medium'>Spécialités</p>
-                    </div>
-                    <div className='text-center text-white'>
-                        <h2 className='font-bold'>12</h2>
-                        <p className='font-medium'>Spécialités</p>
-                    </div>
-                    <div className='text-center text-white'>
-                        <h2 className='font-bold'>12</h2>
-                        <p className='font-medium'>Spécialités</p>
-                    </div>
-                    <div className='text-center text-white'>
-                        <h2 className='font-bold'>12</h2>
-                        <p className='font-medium'>Spécialités</p>
-                    </div>
+                    {overview && Object.entries(overview).map(([key, value]) => (
+                        <div key={key} className='text-center text-white'>
+                            <h2 className='font-bold'>{value}</h2>
+                            <p className='font-medium'>{key}</p>
+                        </div>
+                    ))}
+                    
                 </div>
             </section>
             <section className="patient-record bg-white rounded-[7px]">
@@ -36,7 +51,7 @@ function Dashbord() {
                     <div className="content rounded-[7px]">
                         <h2 className='font-medium text-xs'>Find Patient's Record</h2>
                         <p className='text-xs opacity-[.8]'>Get acces to patient’s record for laboratory test requests and processing.</p>
-                        <a className='bg-white rounded-[4px] font-medium text-xs'>Fiend Patient ></a>
+                        <a className='bg-white rounded-[4px] font-medium text-xs'>Fiend Patient </a>
                     </div>
                 </div>
             </section>
@@ -105,22 +120,26 @@ function Dashbord() {
                 </div>
                 <div className="tasks-content">
                     <table className='text-sm'>
-                        <tr>
+                        <thead>
+                            <tr>
 
-                        <th>Tasks</th>
-                        <th>Date & Time</th>
-                        <th></th>
-                        </tr>
-                        <tr className='opacity-[0.6] font-medium'>
-                            <td>Call Roselyn Barium</td>
-                            <td>26-12-2023 </td>
-                            <td>2:38 pm</td>
-                        </tr>
-                        <tr className='opacity-[0.6] font-medium'>
-                            <td>Call Roselyn Barium</td>
-                            <td>26-12-2023</td>
-                            <td>2:38 pm</td>
-                        </tr>
+                            <th>Tasks</th>
+                            <th>Date & Time</th>
+                            <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr className='opacity-[0.6] font-medium'>
+                                <td>Call Roselyn Barium</td>
+                                <td>26-12-2023 </td>
+                                <td>2:38 pm</td>
+                            </tr>
+                            <tr className='opacity-[0.6] font-medium'>
+                                <td>Call Roselyn Barium</td>
+                                <td>26-12-2023</td>
+                                <td>2:38 pm</td>
+                            </tr>
+                        </tbody>
                     </table>
                 </div>
             </section>

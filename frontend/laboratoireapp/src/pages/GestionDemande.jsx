@@ -6,7 +6,7 @@ function GestionDemande() {
     return (
         <div className='container-gestion-demande'>
             <h2 className='font-medium text-lg'>Liste des demandes</h2>
-            <FilterSearchHeader className='gestion-specialiste-header'/>
+            <FilterSearchHeader className='gestion-specialiste-header' navTo='/ajouter/demande' navToContent='Ajouter Analyse' />
             <div className="gestion-demande-table">
                 <table className='w-full bg-white rounded-[5px]'>
                     <thead className='bg-[var(--main-color)] text-white'>

@@ -3,17 +3,19 @@ import { useState } from 'react';
 import DropDownMenu from '../components/DropDownMenu';
 
 function NouvelleAnalyse() {
-    const options = [
-        "Analyse 1",
-        "Analyse 2",
-        "Analyse 3",
-        "Analyse 4",
-        "Analyse 5",
+    const optionsEquipement = [
+        "Sering",
+        "Plasma",
     ]
+    const optionsReactif = [
+        "Panadol",
+        "Paracetamol",
+        "Smacta"
+    ]
+    
 
     const [isShowingDropdown1, setIsShowingDropdown1] = useState(false);
     const [isShowingDropdown2, setIsShowingDropdown2] = useState(false);
-    // Add state for selected values
     const [equipment, setEquipment] = useState('');
     const [reactif, setReactif] = useState('');
 
@@ -58,7 +60,7 @@ function NouvelleAnalyse() {
                     </div>
                     {isShowingDropdown1 && (
                         <DropDownMenu 
-                            Options={options} 
+                            Options={optionsEquipement} 
                             handleAnalyseOption={handleAnalyseOption1}
                         />
                     )}
@@ -93,7 +95,7 @@ function NouvelleAnalyse() {
                     </div>
                     {isShowingDropdown2 && (
                         <DropDownMenu 
-                            Options={options} 
+                            Options={optionsReactif} 
                             handleAnalyseOption={handleAnalyseOption2}
                         />
                     )}

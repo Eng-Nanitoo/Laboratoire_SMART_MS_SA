@@ -9,8 +9,8 @@
     background-color: #fff;
     border-radius: 19px;
     box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.08);
-    
 }
+
 .pagination .previous-icon, .pagination .next-icon{
     border: none;
     display: flex;
@@ -29,6 +29,7 @@
     border: none;
     border-radius: 50%;
     background-color: transparent;
+    color: rgba(101, 101, 101, 1);
 }
 .pagination .pagination-pages .current-page{
     background-color: rgba(43, 121, 211, 1);

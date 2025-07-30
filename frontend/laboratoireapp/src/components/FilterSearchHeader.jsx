@@ -1,11 +1,12 @@
+import { NavLink } from 'react-router-dom';
 import './FilterSearchHeader.css';
 
-function FilterSearchHeader({className}) {
+function FilterSearchHeader({className,navTo,navToContent,totalItems}) {
     return (
-        <div className={`flex justify-between ${className}`}>
+        <div className={`flex justify-between ${className} w-full`}>
             <div className="stats flex gap-10">
-                <p>All (56) </p>
-                <button className='bg-white rounded-[7px] cursor-pointer text-sm add-specialite-button'>Ajouter une specialite +</button>
+                <p>All ({totalItems}) </p>
+                <NavLink to={navTo} className='bg-white rounded-[7px] cursor-pointer text-sm add-specialite-button'>{navToContent}</NavLink>
             </div>
             <div className="search-filter flex gap-1.5">
                 <div className="search-icon">

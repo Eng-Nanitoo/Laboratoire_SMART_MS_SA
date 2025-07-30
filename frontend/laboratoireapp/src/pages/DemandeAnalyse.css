@@ -14,7 +14,7 @@
 .container-demande-analyse .demande-analyse-form .input-label label{
     color: rgba(6, 28, 73, 1);
 }
-.container-demande-analyse .demande-analyse-form .input-label input{
+.container-demande-analyse .demande-analyse-form .input-label input,.container-demande-analyse .demande-analyse-form .input-label select{
     margin-block: 10px;
     border: 1px solid #e8e8e8;
     padding: 5px 10px;

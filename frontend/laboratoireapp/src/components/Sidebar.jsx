@@ -1,20 +1,29 @@
 import './Sidebar.css';
 import LogoSmart from '../assets/Logo_Smart.png'
+import { NavLink } from 'react-router-dom';
 
 function Sidebar(){
     return (
         <aside className="sidebar">
             <img src={LogoSmart} className='logo' width={100} height={100}/>
             <div className="links">
-                <a href="/dashbord" className='text-sm block font-medium'><i class='bx bxs-dashboard'>
-                    </i>Dashbord
-                </a>
-                <a href="/dashbord" className='text-sm block font-medium'><i class='bx bxs-dashboard'></i>Gestion des utilisateurs</a>
-                <a href="/dashbord" className='text-sm block font-medium'><i class='bx bxs-dashboard'></i>Information du labo</a>
-                <a href="/dashbord" className='text-sm block font-medium'><i class='bx bxs-dashboard'></i>Suivie du stock</a>
-                <a href="/dashbord" className='text-sm block font-medium'><i class='bx bxs-dashboard'></i>Gestion des spécialistes</a>
-                <a href="/dashbord" className='text-sm block font-medium'><i class='bx bxs-dashboard'></i>Type des analyse</a>
-                <a href="/dashbord" className='text-sm block font-medium'><i class='bx bxs-dashboard'></i>Article</a>
+                <NavLink to="/dashbord" className='text-sm font-medium text-center flex flex-col items-center gap-0.5'>
+                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M1 10H7C7.26522 10 7.51957 9.89464 7.70711 9.70711C7.89464 9.51957 8 9.26522 8 9V1C8 0.734784 7.89464 0.48043 7.70711 0.292893C7.51957 0.105357 7.26522 0 7 0H1C0.734784 0 0.48043 0.105357 0.292893 0.292893C0.105357 0.48043 0 0.734784 0 1V9C0 9.26522 0.105357 9.51957 0.292893 9.70711C0.48043 9.89464 0.734784 10 1 10ZM0 17C0 17.2652 0.105357 17.5196 0.292893 17.7071C0.48043 17.8946 0.734784 18 1 18H7C7.26522 18 7.51957 17.8946 7.70711 17.7071C7.89464 17.5196 8 17.2652 8 17V13C8 12.7348 7.89464 12.4804 7.70711 12.2929C7.51957 12.1054 7.26522 12 7 12H1C0.734784 12 0.48043 12.1054 0.292893 12.2929C0.105357 12.4804 0 12.7348 0 13V17ZM10 17C10 17.2652 10.1054 17.5196 10.2929 17.7071C10.4804 17.8946 10.7348 18 11 18H17C17.2652 18 17.5196 17.8946 17.7071 17.7071C17.8946 17.5196 18 17.2652 18 17V10C18 9.73478 17.8946 9.48043 17.7071 9.29289C17.5196 9.10536 17.2652 9 17 9H11C10.7348 9 10.4804 9.10536 10.2929 9.29289C10.1054 9.48043 10 9.73478 10 10V17ZM11 7H17C17.2652 7 17.5196 6.89464 17.7071 6.70711C17.8946 6.51957 18 6.26522 18 6V1C18 0.734784 17.8946 0.48043 17.7071 0.292893C17.5196 0.105357 17.2652 0 17 0H11C10.7348 0 10.4804 0.105357 10.2929 0.292893C10.1054 0.48043 10 0.734784 10 1V6C10 6.26522 10.1054 6.51957 10.2929 6.70711C10.4804 6.89464 10.7348 7 11 7Z" fill="#F8F8F8"/>
+                    </svg>
+                    Dashbord
+                </NavLink>
+                <NavLink to="/gestion/utilisateur" className='text-sm font-medium text-center flex flex-col items-center gap-0.5'>
+                <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M17.1721 13.1238C17.2453 12.6281 17.2453 12.1219 17.1721 11.6262L17.8978 11.1023C17.9822 11.0426 18.0188 10.9195 17.9906 10.8035C17.8022 10.0441 17.4787 9.35508 17.0568 8.78555C16.9921 8.69766 16.888 8.67656 16.8036 8.73633L16.0779 9.26016C15.7713 8.9332 15.4198 8.68008 15.04 8.51133V7.46367C15.04 7.34414 14.9725 7.23867 14.8797 7.21406C14.2524 7.03828 13.6139 7.04531 13.0176 7.21406C12.9248 7.23867 12.8573 7.34414 12.8573 7.46367V8.51133C12.4776 8.68008 12.126 8.9332 11.8194 9.26016L11.0937 8.73633C11.0121 8.67656 10.9052 8.69766 10.8405 8.78555C10.4186 9.35508 10.0951 10.0441 9.90667 10.8035C9.87854 10.9195 9.91792 11.0426 9.99949 11.1023L10.7252 11.6262C10.6521 12.1219 10.6521 12.6281 10.7252 13.1238L9.99949 13.6477C9.91511 13.7074 9.87854 13.8305 9.90667 13.9465C10.0951 14.7059 10.4186 15.3914 10.8405 15.9645C10.9052 16.0523 11.0093 16.0734 11.0937 16.0137L11.8194 15.4898C12.126 15.8168 12.4776 16.0699 12.8573 16.2387V17.2863C12.8573 17.4059 12.9248 17.5113 13.0176 17.5359C13.6449 17.7117 14.2834 17.7047 14.8797 17.5359C14.9725 17.5113 15.04 17.4059 15.04 17.2863V16.2387C15.4198 16.0699 15.7713 15.8168 16.0779 15.4898L16.8036 16.0137C16.8852 16.0734 16.9921 16.0523 17.0568 15.9645C17.4787 15.3949 17.8022 14.7059 17.9906 13.9465C18.0188 13.8305 17.9794 13.7074 17.8978 13.6477L17.1721 13.1238ZM13.9515 14.0801C13.1976 14.0801 12.5873 13.3137 12.5873 12.375C12.5873 11.4363 13.2005 10.6699 13.9515 10.6699C14.7025 10.6699 15.3157 11.4363 15.3157 12.375C15.3157 13.3137 14.7053 14.0801 13.9515 14.0801ZM6.30066 9C8.28931 9 9.90104 6.98555 9.90104 4.5C9.90104 2.01445 8.28931 0 6.30066 0C4.31202 0 2.70028 2.01445 2.70028 4.5C2.70028 6.98555 4.31202 9 6.30066 9ZM11.96 16.9629C11.8953 16.9207 11.8306 16.8715 11.7687 16.8258L11.5465 16.9875C11.3778 17.107 11.1865 17.1738 10.9952 17.1738C10.6886 17.1738 10.3933 17.0121 10.1823 16.7309C9.66758 16.0348 9.27379 15.1875 9.05158 14.284C8.89688 13.6617 9.10502 13.0043 9.55507 12.6773L9.77728 12.5156C9.77447 12.4242 9.77447 12.3328 9.77728 12.2414L9.55507 12.0797C9.10502 11.7563 8.89688 11.0953 9.05158 10.473C9.07689 10.3711 9.11346 10.2691 9.14159 10.1672C9.0347 10.1566 8.93063 10.125 8.82093 10.125H8.35119C7.72675 10.4836 7.03199 10.6875 6.30066 10.6875C5.56934 10.6875 4.87739 10.4836 4.25014 10.125H3.7804C1.6933 10.125 0 12.2414 0 14.85V16.3125C0 17.2441 0.604751 18 1.35014 18H11.2512C11.5353 18 11.7997 17.8875 12.0163 17.7012C11.9825 17.5676 11.96 17.4305 11.96 17.2863V16.9629Z" fill="#FBFCFF"/>
+                </svg>
+                Gestion des utilisateurs
+                </NavLink>
+                <NavLink to="/labo" className='text-sm font-medium text-center flex flex-col items-center gap-0.5'>Information du labo</NavLink>
+                <NavLink to="/article" className='text-sm font-medium text-center flex flex-col items-center gap-0.5'>Suivie du stock</NavLink>
+                <NavLink to="/gestion/specialite" className='text-sm font-medium text-center flex flex-col items-center gap-0.5'>Gestion des spécialistes</NavLink>
+                <NavLink to="/gestion/analyse" className='text-sm font-medium text-center flex flex-col items-center gap-0.5'>Type des analyse</NavLink>
+                <NavLink to="/article" className='text-sm font-medium text-center flex flex-col items-center gap-0.5'>Article</NavLink>
             </div>
         </aside>
     )
