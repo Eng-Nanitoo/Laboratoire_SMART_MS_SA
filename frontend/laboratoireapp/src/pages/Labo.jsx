@@ -223,7 +223,7 @@ function Labo() {
                         <div className="button mt-4">
                             <button
                                 type="submit"
-                                form="labo-form" // Connect to form
+                                form="labo-form"
                                 className="bg-blue-600 hover:bg-blue-700 text-white w-40 py-2 text-center rounded-[3px] cursor-pointer transition-colors duration-200"
                                 onClick={handleLaboRegister}
                             >
