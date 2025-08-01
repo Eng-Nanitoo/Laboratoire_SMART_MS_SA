@@ -43,3 +43,11 @@
 .container-ajouter-specialite .ajouter-specialite-form .choice input {
     margin: 10px 10px 5px 0;
 }
+
+@media (max-width: 900px) {
+    .container-ajouter-specialite .ajouter-specialite-form .input-label input,
+    .container-ajouter-specialite .ajouter-specialite-form .input-label textarea {
+        width: 100%;
+    }
+    
+}

@@ -30,7 +30,7 @@ const InputField = memo(({
                 type={type}
                 name={name}
                 placeholder={placeholder}
-                className={`rounded-[5px] border ${error ? 'border-red-500' : ''}`}
+                className={`rounded-[5px] max-[900px]:w-full border ${error ? 'border-red-500' : ''}`}
                 value={value}
                 onChange={onChange}
                 disabled={disabled}
@@ -159,8 +159,8 @@ function Labo() {
                 <div className="logo">
                     <h1 className="font-bold text-xl">LABO</h1>
                 </div>
-                <div className="form-container flex justify-between">
-                    <form onSubmit={handleLaboRegister} className="space-y-4 w-1/2">
+                <div className="form-container flex justify-between max-[900px]:block">
+                    <form onSubmit={handleLaboRegister} className="space-y-4 w-1/2 max-[900px]:w-full">
                         <InputField
                             label="Nom"
                             name="nom"
@@ -220,7 +220,7 @@ function Labo() {
                                 className="w-[350px] h-[250px] object-cover rounded-lg"
                             />
                         </div>
-                        <div className="button mt-4">
+                        <div className="button">
                             <button
                                 type="submit"
                                 form="labo-form"

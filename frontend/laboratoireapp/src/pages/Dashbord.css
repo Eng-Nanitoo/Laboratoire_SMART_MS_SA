@@ -11,6 +11,7 @@
     "tests tests tests calendar calendar"
     ;
 }
+
 .overview{
     padding: 10px;
     grid-area: overview;
@@ -94,4 +95,17 @@
     grid-area: calendar;
     background-color: var(--secondary-color);
 
+}
+
+@media (max-width: 900px) {
+    .container-dashbord{
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        padding-inline: 15px;
+    }
+    .overview, .patient-record, .specialites, .labaoratory, .tasks, .tests, .calendar{
+        padding: 10px;
+    }
+    
 }

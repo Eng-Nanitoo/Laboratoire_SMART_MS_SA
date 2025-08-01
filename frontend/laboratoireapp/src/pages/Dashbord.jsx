@@ -4,10 +4,11 @@ import Logo from '../assets/LaboImage.jpg';
 import Calendar from '../components/Calendar';
 import api from '../api/api';
 import Loading from '../components/Loading';
-
+import { I18nProvider } from '../components/I18nProvider';
 
 function Dashbord() {
     const [overview, setOverview] = useState({})
+    const [specialites, setSpecialites] = useState({})
     const [isLoading, setIsLoading] = useState(true)
     const [error, setError] = useState(null)
 
@@ -27,16 +28,36 @@ function Dashbord() {
             }
         }
 
-        fetchOverview()
+        const fetchSpecialites = async () => {
+            try {
+                const response = await api.get('/specialites')
+                const topSpecialites = response.data.results
+                    .sort((a, b) => (b.analyse_associed || 0) - (a.analyse_associed || 0))
+                    .slice(0, 3)
+                    .reduce((acc, specialite) => {
+                        acc[specialite.id] = specialite.nom;
+                        return acc;
+                    }, {});
+                setSpecialites(topSpecialites)
+                
+            } catch (error) {
+                console.error('Error fetching specialites:', error)
+            }
+        }
+
+        fetchSpecialites();
+
+        fetchOverview();
     }, [])
 
     return (
+        
         <div className='container-dashbord grid grid-cols-5 gap-8'>
             <section className="overview bg-white">
                 <h3 className="opacity-[.7] text-white">Overview</h3>
-                    {isLoading && <p className='w-full text-white text-sm'>Data will be available soon ....</p>}
+                    {isLoading && <p className='w-full text-white text-sm md:text-xs'>Data will be available soon ....</p>}
                     {error && <p className='w-full text-white text-sm'>Oups Something Went Wrong Please Try Again Later....</p>}
-                <div className="statistiques grid grid-cols-5">
+                <div className="statistiques grid grid-cols-4 max-[900px]:text-xs">
                     {overview && Object.entries(overview).map(([key, value]) => (
                         <div key={key} className='text-center text-white'>
                             <h2 className='font-bold'>{value}</h2>
@@ -56,39 +77,21 @@ function Dashbord() {
                 </div>
             </section>
             <section className="specialites grid grid-cols-3 gap-5">
-                <div className="specialite grid grid-cols-2 items-center gap-10 bg-white rounded-[5px]">
-                    <div className="specialite-number">
-                        <p className='font-medium text-xs opacity-[.6]'>Specialite</p>
-                        <span className='font-medium text-sm'>12</span>
+                {Object.entries(specialites).map(([id, nom]) => (
+                    console.log(id, nom),
+                    <div className="specialite grid grid-cols-2 items-center gap-10 bg-white rounded-[5px] max-[900px]:gap-5" key={id}>
+                        <div className="specialite-number">
+                            <p className='font-medium text-xs opacity-[.6]'>{nom}</p>
+                            <span className='font-medium text-sm'></span>
+                        </div>
+                        <div className="specialite-logo bg-amber-600  rounded-[5px] max-[900px]:w-fit flex justify-center items-center">
+                            <svg className='max-[900px]:w-5 max-[900px]:h-5' width="20" height="20" viewBox="0 0 23 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M21.6545 17.971L15.0279 10.0019V2.2475H16.8607V0.644531H5.86377V2.2475H7.6966V10.0019L1.07001 17.971C0.670304 18.4515 0.430367 19.0193 0.376751 19.6116C0.323135 20.2039 0.457931 20.7976 0.766224 21.3271C1.07452 21.8566 1.54429 22.3011 2.12355 22.6116C2.70281 22.922 3.36899 23.0862 4.04836 23.0861H18.6752C19.3546 23.0862 20.0208 22.922 20.6 22.6116C21.1793 22.3011 21.6491 21.8566 21.9574 21.3271C22.2657 20.7976 22.4005 20.2039 22.3468 19.6116C22.2932 19.0193 22.0533 18.4515 21.6536 17.971H21.6545ZM9.52943 10.5228V2.2475H13.1951V10.5228L15.6447 13.4683H7.07986L9.52943 10.5228ZM18.6762 21.4831H4.04928C3.70818 21.4828 3.37381 21.4001 3.08309 21.244C2.79236 21.088 2.55658 20.8648 2.40177 20.5989C2.24695 20.3331 2.17912 20.0351 2.20577 19.7376C2.23242 19.4402 2.3525 19.1551 2.55277 18.9136L5.74739 15.0712H16.9771L20.1727 18.9136C20.3729 19.1551 20.493 19.4402 20.5197 19.7376C20.5463 20.0351 20.4785 20.3331 20.3237 20.5989C20.1689 20.8648 19.9331 21.088 19.6423 21.244C19.3516 21.4001 19.0173 21.4828 18.6762 21.4831Z" fill="#F8F8F8"/>
+                            </svg>
+                        </div>
                     </div>
-                    <div className="specialite-logo bg-amber-600 w-8 rounded-[5px]">
-                        <svg width="20" height="20" viewBox="0 0 23 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M21.6545 17.971L15.0279 10.0019V2.2475H16.8607V0.644531H5.86377V2.2475H7.6966V10.0019L1.07001 17.971C0.670304 18.4515 0.430367 19.0193 0.376751 19.6116C0.323135 20.2039 0.457931 20.7976 0.766224 21.3271C1.07452 21.8566 1.54429 22.3011 2.12355 22.6116C2.70281 22.922 3.36899 23.0862 4.04836 23.0861H18.6752C19.3546 23.0862 20.0208 22.922 20.6 22.6116C21.1793 22.3011 21.6491 21.8566 21.9574 21.3271C22.2657 20.7976 22.4005 20.2039 22.3468 19.6116C22.2932 19.0193 22.0533 18.4515 21.6536 17.971H21.6545ZM9.52943 10.5228V2.2475H13.1951V10.5228L15.6447 13.4683H7.07986L9.52943 10.5228ZM18.6762 21.4831H4.04928C3.70818 21.4828 3.37381 21.4001 3.08309 21.244C2.79236 21.088 2.55658 20.8648 2.40177 20.5989C2.24695 20.3331 2.17912 20.0351 2.20577 19.7376C2.23242 19.4402 2.3525 19.1551 2.55277 18.9136L5.74739 15.0712H16.9771L20.1727 18.9136C20.3729 19.1551 20.493 19.4402 20.5197 19.7376C20.5463 20.0351 20.4785 20.3331 20.3237 20.5989C20.1689 20.8648 19.9331 21.088 19.6423 21.244C19.3516 21.4001 19.0173 21.4828 18.6762 21.4831Z" fill="#F8F8F8"/>
-                        </svg>
-                    </div>
-                </div>
-                <div className="specialite grid grid-cols-2 items-center gap-10 bg-white rounded-[5px]">
-                    <div className="specialite-number">
-                        <p className='font-medium text-xs opacity-[.6]'>Specialite</p>
-                        <span className='font-medium text-sm'>12</span>
-                    </div>
-                    <div className="specialite-logo bg-amber-600 w-8 rounded-[5px]">
-                        <svg width="20" height="20" viewBox="0 0 23 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M21.6545 17.971L15.0279 10.0019V2.2475H16.8607V0.644531H5.86377V2.2475H7.6966V10.0019L1.07001 17.971C0.670304 18.4515 0.430367 19.0193 0.376751 19.6116C0.323135 20.2039 0.457931 20.7976 0.766224 21.3271C1.07452 21.8566 1.54429 22.3011 2.12355 22.6116C2.70281 22.922 3.36899 23.0862 4.04836 23.0861H18.6752C19.3546 23.0862 20.0208 22.922 20.6 22.6116C21.1793 22.3011 21.6491 21.8566 21.9574 21.3271C22.2657 20.7976 22.4005 20.2039 22.3468 19.6116C22.2932 19.0193 22.0533 18.4515 21.6536 17.971H21.6545ZM9.52943 10.5228V2.2475H13.1951V10.5228L15.6447 13.4683H7.07986L9.52943 10.5228ZM18.6762 21.4831H4.04928C3.70818 21.4828 3.37381 21.4001 3.08309 21.244C2.79236 21.088 2.55658 20.8648 2.40177 20.5989C2.24695 20.3331 2.17912 20.0351 2.20577 19.7376C2.23242 19.4402 2.3525 19.1551 2.55277 18.9136L5.74739 15.0712H16.9771L20.1727 18.9136C20.3729 19.1551 20.493 19.4402 20.5197 19.7376C20.5463 20.0351 20.4785 20.3331 20.3237 20.5989C20.1689 20.8648 19.9331 21.088 19.6423 21.244C19.3516 21.4001 19.0173 21.4828 18.6762 21.4831Z" fill="#F8F8F8"/>
-                        </svg>
-                    </div>
-                </div>
-                <div className="specialite grid grid-cols-2 items-center gap-10 bg-white rounded-[5px]">
-                    <div className="specialite-number">
-                        <p className='font-medium text-xs opacity-[.6]'>Specialite</p>
-                        <span className='font-medium text-sm'>12</span>
-                    </div>
-                    <div className="specialite-logo bg-amber-600 w-8 rounded-[5px]">
-                        <svg width="20" height="20" viewBox="0 0 23 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M21.6545 17.971L15.0279 10.0019V2.2475H16.8607V0.644531H5.86377V2.2475H7.6966V10.0019L1.07001 17.971C0.670304 18.4515 0.430367 19.0193 0.376751 19.6116C0.323135 20.2039 0.457931 20.7976 0.766224 21.3271C1.07452 21.8566 1.54429 22.3011 2.12355 22.6116C2.70281 22.922 3.36899 23.0862 4.04836 23.0861H18.6752C19.3546 23.0862 20.0208 22.922 20.6 22.6116C21.1793 22.3011 21.6491 21.8566 21.9574 21.3271C22.2657 20.7976 22.4005 20.2039 22.3468 19.6116C22.2932 19.0193 22.0533 18.4515 21.6536 17.971H21.6545ZM9.52943 10.5228V2.2475H13.1951V10.5228L15.6447 13.4683H7.07986L9.52943 10.5228ZM18.6762 21.4831H4.04928C3.70818 21.4828 3.37381 21.4001 3.08309 21.244C2.79236 21.088 2.55658 20.8648 2.40177 20.5989C2.24695 20.3331 2.17912 20.0351 2.20577 19.7376C2.23242 19.4402 2.3525 19.1551 2.55277 18.9136L5.74739 15.0712H16.9771L20.1727 18.9136C20.3729 19.1551 20.493 19.4402 20.5197 19.7376C20.5463 20.0351 20.4785 20.3331 20.3237 20.5989C20.1689 20.8648 19.9331 21.088 19.6423 21.244C19.3516 21.4001 19.0173 21.4828 18.6762 21.4831Z" fill="#F8F8F8"/>
-                        </svg>
-                    </div>
-                </div>
+                ))
+                }
             </section>
             <section className="labaoratory bg-white rounded-[5px] flex justify-between gap-20 items-center">
                 <div>
@@ -98,7 +101,7 @@ function Dashbord() {
                         new pending and completed New, pending and completed
                         dont pending and completed.
                     </p>
-                    <a href="" className='test-template-link text-white rounded-[5px]'>View test template ></a>
+                    <a href="" className='test-template-link text-white rounded-[5px]'>View test template </a>
                 </div>
                 <div className='labo-icon rounded-[7px]'>
                     <svg width="72" height="76" viewBox="0 0 72 76" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -148,24 +151,24 @@ function Dashbord() {
                 <table className='w-full'>
                     <thead>
                         <tr>
-                            <th className='text-sm font-medium '></th>
-                            <th className='text-sm font-medium '>Patient</th>
-                            <th className='text-sm font-medium '>phone</th>
-                            <th className='text-sm font-medium '>type d'analyse</th>
-                            <th className='text-sm font-medium '>date</th>
-                            <th className='text-sm font-medium '>Etat</th>
-                            <th className='text-sm font-medium '>Action</th>
+                            <th className='text-sm font-medium max-[900px]:hidden'></th>
+                            <th className='text-sm font-medium max-[900px]:text-xs'>Patient</th>
+                            <th className='text-sm font-medium max-[900px]:text-xs'>phone</th>
+                            <th className='text-sm font-medium max-[900px]:text-xs'>type d'analyse</th>
+                            <th className='text-sm font-medium max-[900px]:text-xs'>date</th>
+                            <th className='text-sm font-medium max-[900px]:hidden'>Etat</th>
+                            <th className='text-sm font-medium max-[900px]:hidden'>Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td className='text-sm opacity-[0.5] font-medium place-items-center text-center'>101</td>
-                            <td className='text-sm opacity-[0.5] font-medium place-items-center text-center'>Ahmed</td>
-                            <td className='text-sm opacity-[0.5] font-medium place-items-center text-center'>26179812</td>
-                            <td className='text-sm opacity-[0.5] font-medium place-items-center text-center'>Analyse de sang</td>
-                            <td className='text-sm opacity-[0.5] font-medium place-items-center text-center'>26-09-2025</td>
-                            <td className='text-sm opacity-[0.5] font-medium place-items-center text-center'>Planifié</td>
-                            <td className='text-sm opacity-[0.5] font-medium place-items-center text-center'>
+                            <td className='text-sm opacity-[0.5] font-medium place-items-center text-center max-[900px]:hidden'>101</td>
+                            <td className='text-sm opacity-[0.5] font-medium place-items-center text-center max-[900px]:text-xs'>Ahmed</td>
+                            <td className='text-sm opacity-[0.5] font-medium place-items-center text-center max-[900px]:text-xs'>26179812</td>
+                            <td className='text-sm opacity-[0.5] font-medium place-items-center text-center max-[900px]:text-xs'>Analyse de sang</td>
+                            <td className='text-sm opacity-[0.5] font-medium place-items-center text-center max-[900px]:text-xs'>26-09-2025</td>
+                            <td className='text-sm opacity-[0.5] font-medium place-items-center text-center max-[900px]:hidden'>Planifié</td>
+                            <td className='text-sm opacity-[0.5] font-medium place-items-center text-center max-[900px]:hidden'>
                                 <svg className='cursor-pointer' width="16" height="10" viewBox="0 0 16 10" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M1 5C1 5 3.1 1 8 1C12.9 1 15 5 15 5C15 5 12.9 9 8 9C3.1 9 1 5 1 5Z" stroke="#B5B7C0" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                                     <path d="M7.99987 6.71434C9.15967 6.71434 10.0999 5.94683 10.0999 5.00005C10.0999 4.05328 9.15967 3.28577 7.99987 3.28577C6.84007 3.28577 5.89987 4.05328 5.89987 5.00005C5.89987 5.94683 6.84007 6.71434 7.99987 6.71434Z" stroke="#B5B7C0" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -178,6 +181,7 @@ function Dashbord() {
             </section>
             <section className="bg-red-50">
             </section>
+            
         </div>
     )
 }

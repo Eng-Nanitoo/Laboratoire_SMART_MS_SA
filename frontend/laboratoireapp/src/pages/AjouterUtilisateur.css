@@ -6,10 +6,7 @@
     margin-bottom: 20px;
 }
 
-.container-ajouter-utilisateur .ajouter-utilisateur-form {
-    display: grid;
-    grid-template-columns: repeat(3,1fr);
-}
+
 .container-ajouter-utilisateur .ajouter-utilisateur-form .input-label {
     margin-block: 10px;
 }

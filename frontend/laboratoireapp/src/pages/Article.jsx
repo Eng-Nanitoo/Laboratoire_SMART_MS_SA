@@ -23,7 +23,7 @@ const InputField = memo(({
                 type={type}
                 name={name}
                 placeholder={placeholder}
-                className={`rounded-[5px] border ${error ? 'border-red-500' : ''}`}
+                className={`rounded-[5px] max-[900px]:w-full border ${error ? 'border-red-500' : ''}`}
                 value={value}
                 onChange={onChange}
                 disabled={disabled}
@@ -132,7 +132,7 @@ function Article() {
     return (
         <div className='container-article bg-white rounded-[5px]'>
             <h2 className='font-medium'>Ajouter un article</h2>
-            <form  className="article-form grid grid-cols-2" onSubmit={handleArticleRegister}>
+            <form  className="article-form grid grid-cols-2 max-[900px]:block" onSubmit={handleArticleRegister}>
                 <InputField
                             label="Nom"
                             name="nom"

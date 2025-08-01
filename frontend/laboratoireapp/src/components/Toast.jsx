@@ -1,26 +1,28 @@
-import { useEffect,useState } from "react"
+import { useEffect, useState } from "react"
 import './Toast.css';
 import closeIcon from '../assets/closeIcon.png';
 
+function Toast({ content }) {
+    const [isShowed, setIsShowed] = useState(true);
 
-function Toast({content}) {
-    const [isShowed,setIsShowed] = useState(true);
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setIsShowed(false)
+        }, 3000)
+        return () => clearTimeout(timer);
+    }, [])
 
-    useEffect(
-        () => {
-            setTimeout(() => {
-                setIsShowed(false)
-            }, 3000)
-        }
-        ,[]
-    )
-    if(!isShowed) return;
+    if (!isShowed) return null;
+
     return (
-        <div className="toast-container w-fit h-15 text-center text-sm text-white fixed bottom-3.5 right-3.5">
+        <div className="toast-container animate-toast">
             <div className="toast-content">
                 {content}
+                <div className="toast-progress" />
             </div>
-            <button onClick={() => setIsShowed(false)}><img src={closeIcon} alt="" /></button>
+            <button className="toast-close" onClick={() => setIsShowed(false)}>
+                <img src={closeIcon} alt="close" />
+            </button>
         </div>
     )
 }

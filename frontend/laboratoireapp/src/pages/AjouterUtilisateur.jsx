@@ -21,13 +21,11 @@ function AjouterUtilisateur() {
     const [specialitesAnalyses, setSpecialitesAnalyses] = useState([]);
     const [isShowedToast, setIsShowedToast] = useState(false);
 
-
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setUtilisateur(prev => ({
             ...prev,
             [name]: value,
-            // Reset analyses_autorises when role changes
             ...(name === 'role' && value !== 'specialiste' ? { analyses_autorises: [] } : {})
         }));
     };
@@ -72,8 +70,6 @@ function AjouterUtilisateur() {
     const handleUtilisateurRegister = async (e) => {
         e.preventDefault();
 
-        console.log('Current utilisateur state:', utilisateur);
-        
         if (!validateForm()) {
             return;
         }
@@ -81,7 +77,6 @@ function AjouterUtilisateur() {
         setLoading(true);
         try {
             const response = await api.post('utilisateurs/', utilisateur);
-            console.log(utilisateur)
             if (response.status === 201) {
                 setMessages({ success: 'Utilisateur ajouté avec succès' });
                 setIsShowedToast(true);
@@ -93,19 +88,28 @@ function AjouterUtilisateur() {
                     email: '',
                     telephone: '',
                     role: '',
+                    specialite: '',
                     analyses_autorises: []
                 });
             }
-            
         } catch (error) {
-            console.log(error)
-            console.error('Erreur lors de l\'ajout de l\'utilisateur:', error);
-            setMessages({ error: 'Erreur lors de l\'ajout de l\'utilisateur' });
+            // Merge server field errors with validation errors
+            if (error.response && error.response.data) {
+                setMessages(prev => ({
+                    ...prev,
+                    ...error.response.data,
+                    error: error.response.data.error || 'Erreur lors de l\'ajout de l\'utilisateur'
+                }));
+            } else {
+                setMessages(prev => ({
+                    ...prev,
+                    error: 'Erreur lors de l\'ajout de l\'utilisateur'
+                }));
+            }
         } finally {
             setLoading(false);
         }
     };
-
 
     const fetchSpecialitesAnalyses = async () => {
         try {
@@ -122,19 +126,17 @@ function AjouterUtilisateur() {
         fetchSpecialitesAnalyses();
     }, []);
 
-
     if(loading) return <Loading />;
- // ... existing imports and initial code ...
 
     return (
         <div className='container-ajouter-utilisateur bg-white rounded-[5px]'>
             <h2 className='font-medium text-lg'>Ajouter un utilisateur</h2>
-            <div className="ajouter-utilisateur-form grid grid-cols-3 gap-4">
+            <div className="ajouter-utilisateur-form grid grid-cols-3 gap-4 max-[900px]:block">
                 <div className="input-label">
-                    <label htmlFor="" className='font-medium text-sm'>Nom complet</label>
+                    <label className='font-medium text-sm'>Nom complet</label>
                     <input 
                         type="text" 
-                        placeholder='Nom complet' 
+                        placeholder='Nom complet'
                         name='nom_complet' 
                         onChange={handleInputChange}
                         className={messages.nom_complet ? 'border-red-500' : ''}
@@ -142,9 +144,12 @@ function AjouterUtilisateur() {
                     {messages.nom_complet && (
                         <span className="text-red-500 text-xs mt-1 block">{messages.nom_complet}</span>
                     )}
+                    {Array.isArray(messages.nom_complet) && messages.nom_complet.map((msg, i) => (
+                        <span key={i} className="text-red-500 text-xs mt-1 block">{msg}</span>
+                    ))}
                 </div>
                 <div className="input-label">
-                    <label htmlFor="" className='font-medium text-sm'>Genre</label>
+                    <label className='font-medium text-sm'>Genre</label>
                     <select 
                         name='genre' 
                         onChange={handleInputChange}
@@ -157,9 +162,12 @@ function AjouterUtilisateur() {
                     {messages.genre && (
                         <span className="text-red-500 text-xs mt-1 block">{messages.genre}</span>
                     )}
+                    {Array.isArray(messages.genre) && messages.genre.map((msg, i) => (
+                        <span key={i} className="text-red-500 text-xs mt-1 block">{msg}</span>
+                    ))}
                 </div>
                 <div className="input-label">
-                    <label htmlFor="" className='font-medium text-sm'>NNI</label>
+                    <label className='font-medium text-sm'>NNI</label>
                     <input 
                         type="text" 
                         placeholder='NNI' 
@@ -170,9 +178,12 @@ function AjouterUtilisateur() {
                     {messages.nni && (
                         <span className="text-red-500 text-xs mt-1 block">{messages.nni}</span>
                     )}
+                    {Array.isArray(messages.nni) && messages.nni.map((msg, i) => (
+                        <span key={i} className="text-red-500 text-xs mt-1 block">{msg}</span>
+                    ))}
                 </div>
                 <div className="input-label">
-                    <label htmlFor="" className='font-medium text-sm'>Adresse</label>
+                    <label className='font-medium text-sm'>Adresse</label>
                     <input 
                         type="text" 
                         placeholder='Adresse' 
@@ -183,9 +194,12 @@ function AjouterUtilisateur() {
                     {messages.adresse && (
                         <span className="text-red-500 text-xs mt-1 block">{messages.adresse}</span>
                     )}
+                    {Array.isArray(messages.adresse) && messages.adresse.map((msg, i) => (
+                        <span key={i} className="text-red-500 text-xs mt-1 block">{msg}</span>
+                    ))}
                 </div>
                 <div className="input-label">
-                    <label htmlFor="" className='font-medium text-sm'>Email</label>
+                    <label className='font-medium text-sm'>Email</label>
                     <input 
                         type="email" 
                         placeholder='Email' 
@@ -196,9 +210,12 @@ function AjouterUtilisateur() {
                     {messages.email && (
                         <span className="text-red-500 text-xs mt-1 block">{messages.email}</span>
                     )}
+                    {Array.isArray(messages.email) && messages.email.map((msg, i) => (
+                        <span key={i} className="text-red-500 text-xs mt-1 block">{msg}</span>
+                    ))}
                 </div>
                 <div className="input-label">
-                    <label htmlFor="" className='font-medium text-sm'>Telephone</label>
+                    <label className='font-medium text-sm'>Telephone</label>
                     <input 
                         type="tel" 
                         placeholder='Telephone' 
@@ -209,6 +226,9 @@ function AjouterUtilisateur() {
                     {messages.telephone && (
                         <span className="text-red-500 text-xs mt-1 block">{messages.telephone}</span>
                     )}
+                    {Array.isArray(messages.telephone) && messages.telephone.map((msg, i) => (
+                        <span key={i} className="text-red-500 text-xs mt-1 block">{msg}</span>
+                    ))}
                 </div>
                 <div className="permissions">
                     <label className='font-medium text-sm block mb-2'>Rôle</label>
@@ -247,11 +267,14 @@ function AjouterUtilisateur() {
                     {messages.role && (
                         <span className="text-red-500 text-xs mt-1 block">{messages.role}</span>
                     )}
+                    {Array.isArray(messages.role) && messages.role.map((msg, i) => (
+                        <span key={i} className="text-red-500 text-xs mt-1 block">{msg}</span>
+                    ))}
                 </div>
                 
                 {utilisateur.role === 'specialiste' && (
                     <div className="analyse-types">
-                        <label htmlFor="" className='font-medium text-sm'>Types d'analyses autorisés</label>
+                        <label className='font-medium text-sm'>Types d'analyses autorisés</label>
                         <div className="analyses-list flex flex-col gap-2 mt-2">
                             {specialitesAnalyses.map((specialite) => (
                                 <div className="choice" key={specialite.id}>
@@ -269,9 +292,15 @@ function AjouterUtilisateur() {
                         {messages.analyses_autorises && (
                             <span className="text-red-500 text-xs mt-1 block">{messages.analyses_autorises}</span>
                         )}
+                        {Array.isArray(messages.analyses_autorises) && messages.analyses_autorises.map((msg, i) => (
+                            <span key={i} className="text-red-500 text-xs mt-1 block">{msg}</span>
+                        ))}
                     </div>
                 )}
             </div>
+            {messages.error && (
+                <div className="text-red-500 text-xs mt-2">{messages.error}</div>
+            )}
             <div className="submit-button mt-6">
                 <button 
                     className='text-white w-40 text-center rounded-[3px] cursor-pointer bg-blue-600 py-2 hover:bg-blue-700 disabled:opacity-50' 
@@ -281,7 +310,6 @@ function AjouterUtilisateur() {
                     {loading ? 'Enregistrement...' : 'Enregistrer'}
                 </button>
             </div>
-
             {isShowedToast && (
                 <Toast 
                     content={messages.success || 'Utilisateur créé avec succès'} 
@@ -291,5 +319,4 @@ function AjouterUtilisateur() {
         </div>
     );
 }
-
 export default AjouterUtilisateur;

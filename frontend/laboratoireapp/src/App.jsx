@@ -18,7 +18,7 @@ import Container from "./Container";
 import GestionSpecialite from "./pages/GestionSpecialite";
 import Register from "./auth/pages/Register";
 import ProtectedRoute from "./components/ProtectedRoute";
-
+import NotFound from "./components/NotFound";
 
 function Logout() {
     localStorage.clear()
@@ -205,9 +205,15 @@ function App() {
             <Route 
                 path="/register" 
                 element={
-                    <Register/>
+                    <ProtectedRoute>
+
+                        <Register/>
+                    </ProtectedRoute>
                 }
             />
+
+            <Route path="*" element={<NotFound />} />
+
         </Routes>
         </BrowserRouter>
     )

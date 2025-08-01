@@ -121,9 +121,9 @@ function AjouterSpecialite() {
                         value={specialite.nom}
                         placeholder='Nom de la specialite'
                         onChange={handleInputChange}
-                        className={messages.nom ? 'error' : ''}
+                        className={messages.nom ? 'error max-[900px]:w-full' : 'max-[900px]:w-full'}
                     />
-                    {messages.nom && <span className="error-message">{messages.nom}</span>}
+                    {messages.nom && <span className="error-message text-sm text-red-500">{messages.nom}</span>}
                 </div>
 
                 <div className="input-label">
@@ -134,9 +134,9 @@ function AjouterSpecialite() {
                         value={specialite.description}
                         placeholder='Description de la specialite'
                         onChange={handleInputChange}
-                        className={messages.description ? 'error' : ''}
+                        className={messages.description ? 'error max-[900px]:w-full' : 'max-[900px]:w-full'}
                     />
-                    {messages.description && <span className="error-message">{messages.description}</span>}
+                    {messages.description && <span className="error-message text-sm text-red-500">{messages.description}</span>}
                 </div>
 
                 <div className="associed-analyse">

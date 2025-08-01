@@ -93,7 +93,7 @@ function DemandeAnalyse() {
                     {error}
                 </div>
             )}
-            <form onSubmit={handleSubmit} className="demande-analyse-form grid grid-cols-2">
+            <form onSubmit={handleSubmit} className="demande-analyse-form grid grid-cols-2 max-[900px]:block">
                 <div className="input-label">
                     <label htmlFor="nom_demandeur" className='font-medium text-sm'>Nom du demandeur</label>
                     <input
@@ -104,6 +104,7 @@ function DemandeAnalyse() {
                         onChange={handleInputChange}
                         placeholder='Nom du demandeur'
                         required
+                        className='max-[900px]:w-full'
                     />
                 </div>
                 <div className="input-label">
@@ -116,6 +117,7 @@ function DemandeAnalyse() {
                         onChange={handleInputChange}
                         placeholder='Telephone'
                         required
+                        className='max-[900px]:w-full'
                     />
                 </div>
                 <div className="input-label">
@@ -128,6 +130,7 @@ function DemandeAnalyse() {
                         onChange={handleInputChange}
                         placeholder='Nom du patient'
                         required
+                        className='max-[900px]:w-full'
                     />
                 </div>
                 <div className="input-label">
@@ -137,6 +140,7 @@ function DemandeAnalyse() {
                         id="genre_patient"
                         value={formData.genre_patient}
                         onChange={handleInputChange}
+                        className='max-[900px]:w-full'
                     >
                         <option value="homme">Homme</option>
                         <option value="femme">Femme</option>
@@ -152,6 +156,7 @@ function DemandeAnalyse() {
                         onChange={handleInputChange}
                         placeholder='adresse'
                         required
+                        className='max-[900px]:w-full'
                     />
                 </div>
                 <div className="input-label">
@@ -163,6 +168,7 @@ function DemandeAnalyse() {
                         value={formData.date}
                         onChange={handleInputChange}
                         required
+                        className='max-[900px]:w-full'
                     />
                 </div>
                 <div className="input-label">
@@ -176,6 +182,7 @@ function DemandeAnalyse() {
                             onClick={showDropDown}
                             readOnly
                             required
+                            
                         />
                         <svg className='dropdown-icon' width="12" height="6" viewBox="0 0 12 6" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M6 6L0.803848 0.75L11.1962 0.75L6 6Z" fill="#D9D9D9"/>
