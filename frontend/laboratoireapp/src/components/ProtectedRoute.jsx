@@ -3,7 +3,7 @@ import {Navigate} from 'react-router-dom'
 import {jwtDecode} from 'jwt-decode'
 import api from "../api/api";
 import { useState,useEffect } from 'react'
-import Loading from "../Components/Loading"
+import Loading from "./Loading";
 
 
 function ProtectedRoute({children}) {

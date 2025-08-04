@@ -50,6 +50,14 @@ function Article() {
         categorie: ''
     });
 
+    const mesureUniteOptions = [
+        'mg', 'g', 'kg', 'ml', 'l'
+    ];
+
+    const categorieOptions = [
+        'reactif','consommable'
+    ];
+
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setArticle(prev => ({
@@ -157,14 +165,26 @@ function Article() {
                             onChange={handleInputChange}
                             error={errors.quantite}
                 />
-                <InputField
-                            label="Unite de mesure"
+                <div className="row">
+                    <div className="input-label">
+                        <label htmlFor="mesure_unite" className="font-medium text-sm">Unité de mesure</label>
+                        <select
+                            id="mesure_unite"
                             name="mesure_unite"
-                            placeholder="Nom"
+                            className={`rounded-[5px] max-[900px]:w-full border ${errors.mesure_unite ? 'border-red-500' : ''}`}
                             value={article.mesure_unite}
                             onChange={handleInputChange}
-                            error={errors.mesure_unite}
-                />
+                        >
+                            <option value="">Sélectionnez une unité</option>
+                            {mesureUniteOptions.map((opt) => (
+                                <option key={opt} value={opt}>{opt}</option>
+                            ))}
+                        </select>
+                        {errors.mesure_unite && (
+                            <p className="text-red-500 text-xs mt-1">{errors.mesure_unite}</p>
+                        )}
+                    </div>
+                </div>
                 <InputField
                             label="Quantité recommandée"
                             name="recommended_quntite"
@@ -173,14 +193,26 @@ function Article() {
                             onChange={handleInputChange}
                             error={errors.recommended_quntite}
                 />
-                <InputField
-                            label="Categorie"
+                <div className="row">
+                    <div className="input-label">
+                        <label htmlFor="categorie" className="font-medium text-sm">Catégorie</label>
+                        <select
+                            id="categorie"
                             name="categorie"
-                            placeholder="Categorie"
+                            className={`rounded-[5px] max-[900px]:w-full border ${errors.categorie ? 'border-red-500' : ''}`}
                             value={article.categorie}
                             onChange={handleInputChange}
-                            error={errors.categorie}
-                />
+                        >
+                            <option value="">Sélectionnez une catégorie</option>
+                            {categorieOptions.map((opt) => (
+                                <option key={opt} value={opt}>{opt}</option>
+                            ))}
+                        </select>
+                        {errors.categorie && (
+                            <p className="text-red-500 text-xs mt-1">{errors.categorie}</p>
+                        )}
+                    </div>
+                </div>
             </form>
             <div className="submit-button">
                 <button
@@ -189,7 +221,7 @@ function Article() {
                     className='article-register text-white text-sm font-medium rounded-[3px]' 
                     onClick={handleArticleRegister}
                 >
-                        Enregistrer
+                    Enregistrer
                 </button>
             </div>
 

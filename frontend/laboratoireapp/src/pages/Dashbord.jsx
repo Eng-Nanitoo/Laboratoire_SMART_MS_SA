@@ -1,7 +1,6 @@
 import React, { useState,useEffect } from 'react'
 import './Dashbord.css'
 import Logo from '../assets/LaboImage.jpg';
-import Calendar from '../components/Calendar';
 import api from '../api/api';
 import Loading from '../components/Loading';
 import { I18nProvider } from '../components/I18nProvider';
@@ -18,7 +17,6 @@ function Dashbord() {
                 setIsLoading(true)
                 const response = await api.get('/overview')
                 setOverview(response.data)
-                console.log(overview)
                 
             } catch (error) {
                 console.error('Error fetching overview:', error)
@@ -58,12 +56,17 @@ function Dashbord() {
                     {isLoading && <p className='w-full text-white text-sm md:text-xs'>Data will be available soon ....</p>}
                     {error && <p className='w-full text-white text-sm'>Oups Something Went Wrong Please Try Again Later....</p>}
                 <div className="statistiques grid grid-cols-4 max-[900px]:text-xs">
-                    {overview && Object.entries(overview).map(([key, value]) => (
-                        <div key={key} className='text-center text-white'>
-                            <h2 className='font-bold'>{value}</h2>
-                            <p className='font-medium'>{key}</p>
-                        </div>
-                    ))}
+                    {overview && Object.entries(overview).map(([key, value]) => {
+                        if (key === 'last_analyses') {
+                            return null;
+                        }
+                        return (
+                            <div key={key} className='text-center text-white'>
+                                <h2 className='font-bold'>{value}</h2>
+                                <p className='font-medium'>{key}</p>
+                            </div>
+                        )
+                    })}
                     
                 </div>
             </section>
@@ -161,12 +164,16 @@ function Dashbord() {
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td className='text-sm opacity-[0.5] font-medium place-items-center text-center max-[900px]:hidden'>101</td>
-                            <td className='text-sm opacity-[0.5] font-medium place-items-center text-center max-[900px]:text-xs'>Ahmed</td>
-                            <td className='text-sm opacity-[0.5] font-medium place-items-center text-center max-[900px]:text-xs'>26179812</td>
-                            <td className='text-sm opacity-[0.5] font-medium place-items-center text-center max-[900px]:text-xs'>Analyse de sang</td>
-                            <td className='text-sm opacity-[0.5] font-medium place-items-center text-center max-[900px]:text-xs'>26-09-2025</td>
+                        {overview.last_analyses && overview.last_analyses.map((analyse, index) => (
+                            
+                        <tr key={index} className='text-sm font-medium hover:bg-gray-100 transition-all duration-300'>
+                            <td className='text-sm opacity-[0.5] font-medium place-items-center text-center max-[900px]:hidden'>{analyse?.code}</td>
+                            <td className='text-sm opacity-[0.5] font-medium place-items-center text-center max-[900px]:text-xs'>{analyse.nom_demandeur}</td>
+                            <td className='text-sm opacity-[0.5] font-medium place-items-center text-center max-[900px]:text-xs'>
+                                {analyse.telephone_demandeur ? analyse.telephone_demandeur : 'N/A'}
+                            </td>
+                            <td className='text-sm opacity-[0.5] font-medium place-items-center text-center max-[900px]:text-xs'>{analyse.type_analyse}</td>
+                            <td className='text-sm opacity-[0.5] font-medium place-items-center text-center max-[900px]:text-xs'>{analyse.date}</td>
                             <td className='text-sm opacity-[0.5] font-medium place-items-center text-center max-[900px]:hidden'>Planifié</td>
                             <td className='text-sm opacity-[0.5] font-medium place-items-center text-center max-[900px]:hidden'>
                                 <svg className='cursor-pointer' width="16" height="10" viewBox="0 0 16 10" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -175,6 +182,8 @@ function Dashbord() {
                                 </svg>
                             </td>
                         </tr>
+
+                        ))}
                     </tbody>
     
                 </table>

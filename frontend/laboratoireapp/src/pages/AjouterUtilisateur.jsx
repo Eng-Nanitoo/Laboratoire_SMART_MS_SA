@@ -93,7 +93,6 @@ function AjouterUtilisateur() {
                 });
             }
         } catch (error) {
-            // Merge server field errors with validation errors
             if (error.response && error.response.data) {
                 setMessages(prev => ({
                     ...prev,
@@ -312,8 +311,7 @@ function AjouterUtilisateur() {
             </div>
             {isShowedToast && (
                 <Toast 
-                    content={messages.success || 'Utilisateur créé avec succès'} 
-                    type={messages.error ? 'error' : 'success'}
+                    content={messages.success || 'Utilisateur créé avec succès'}
                 />
             )}
         </div>

@@ -30,14 +30,18 @@ def overview(request):
     specialites = Specialite.objects.all().count()
     laboratoires = Laboratoire.objects.all().count()
     articles = Article.objects.all().count()
-    # utilisateurs = Utilisateur.objects.all().count()
+    last_analyses = Analyse.objects.order_by('-id')[:5]
+    if last_analyses:
+        last_analyses = AnalyseSerializer(last_analyses,many=True).data
+    else:
+        last_analyses = None
 
     data = {
         'analyses':analyses,
         'specialites':specialites,
         'laboratoires':laboratoires,
         'articles':articles,
-        # 'utilisateurs':utilisateurs
+        'last_analyses':last_analyses,
     }
 
     return Response(data, status=status.HTTP_200_OK)

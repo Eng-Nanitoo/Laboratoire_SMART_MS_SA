@@ -3,7 +3,7 @@ header{
     grid-template-columns: repeat(3,auto);
     padding: 5px 25px;
     border-bottom: .5px solid var(--main-color);
-    /* height: 60px; */
+    max-height: fit-content;
 }
 
 header .page-description h2{
@@ -37,7 +37,29 @@ header .search svg{
     top: 10px;
     right: 10px;
 }
+header .toggle-button{
+    border: .5px solid #ddd;
+}
 
+.dropdown-anim {
+    opacity: 0;
+    transform: translateY(-20px) scale(0.95);
+    pointer-events: none;
+    transition: opacity 0.3s cubic-bezier(.4,0,.2,1), transform 0.3s cubic-bezier(.4,0,.2,1);
+    z-index: 50;
+}
+.dropdown-anim.open {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    pointer-events: auto;
+}
+
+.dropdown-anim ul a{
+    padding: 5px 8px;
+    cursor: pointer;
+    color: rgba(6, 28, 73, 1);
+    font-size: 14px;
+}
 @media (max-width: 900px) {
     header{
         grid-template-columns: repeat(2,auto);
@@ -55,24 +77,4 @@ header .search svg{
         display: none;
     }
     
-}
-
-.dropdown-anim {
-    opacity: 0;
-    transform: translateY(-20px) scale(0.95);
-    pointer-events: none;
-    transition: opacity 0.3s cubic-bezier(.4,0,.2,1), transform 0.3s cubic-bezier(.4,0,.2,1);
-    z-index: 50;
-}
-.dropdown-anim.open {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-    pointer-events: auto;
-}
-.dropdown-anim ul a{
-    padding: 5px 8px;
-    cursor: pointer;
-    color: rgba(6, 28, 73, 1);
-    font-size: 14px;
-
 }

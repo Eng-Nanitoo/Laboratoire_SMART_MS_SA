@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react'
 import './GestionUtilisateur.css';
+import React, { useEffect, useState } from 'react'
 import FilterSearchHeader from '../components/FilterSearchHeader';
-import Pagination from '../Pagination';
+import Pagination from "../components/Pagination";
 import api from '../api/api';
+import { useSearch } from '../context/SearchContext';
 
 function GestionUtilisateur() {
     const [utilisateurs, setUtilisateurs] = useState([]);
@@ -11,6 +12,7 @@ function GestionUtilisateur() {
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(0);
     const itemsPerPage = 10;
+    const { search } = useSearch();
 
     const fetchUtilisateurs = async (page = 1) => {
         setLoading(true);
@@ -40,11 +42,17 @@ function GestionUtilisateur() {
         setCurrentPage(newPage);
     };
 
+    const filteredUtilisateurs = utilisateurs.filter(user =>
+        user.nom_complet?.toLowerCase().includes(search.toLowerCase()) ||
+        user.telephone?.toLowerCase().includes(search.toLowerCase()) ||
+        user.role?.toLowerCase().includes(search.toLowerCase())
+    );
+
     return (
         <div className='container-gestion-utilisateur'>
             <h1 className='font-bold text-xl'>Liste des utilisateurs</h1>
             <div className="gestion-utlisateur-header flex justify-between">
-                <FilterSearchHeader navTo='/ajouter/utilisateur' navToContent='Ajouter Utilisateur +' totalItems={utilisateurs.length}/>
+                <FilterSearchHeader navTo='/ajouter/utilisateur' navToContent='Ajouter Utilisateur +' totalItems={filteredUtilisateurs.length}/>
             </div>
             <div className="gestion-utilisateur-table rounded-[10px] bg-white">
                 <table className='w-full text-sm'>
@@ -68,12 +76,12 @@ function GestionUtilisateur() {
                             <tr>
                                 <td colSpan="7" className="text-center text-red-500 py-4">{error}</td>
                             </tr>
-                        ) : utilisateurs.length === 0 ? (
+                        ) : filteredUtilisateurs.length === 0 ? (
                             <tr>
                                 <td colSpan="7" className="text-center py-4">Aucun utilisateur trouvé</td>
                             </tr>
                         ) : (
-                            utilisateurs.map((user, idx) => (
+                            filteredUtilisateurs.map((user, idx) => (
                                 <tr key={user.id}>
                                     <td>{(currentPage - 1) * itemsPerPage + idx + 1}</td>
                                     <td>{user.nom_complet}</td>

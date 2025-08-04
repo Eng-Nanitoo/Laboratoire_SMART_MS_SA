@@ -19,6 +19,7 @@ import GestionSpecialite from "./pages/GestionSpecialite";
 import Register from "./auth/pages/Register";
 import ProtectedRoute from "./components/ProtectedRoute";
 import NotFound from "./components/NotFound";
+import { SearchProvider } from "./context/SearchContext";
 
 function Logout() {
     localStorage.clear()
@@ -150,50 +151,60 @@ function App() {
             <Route 
                 path="/gestion/specialite" 
                 element={
-                    <ProtectedRoute>
-                        <Container element={element[8]}>
-                        </Container>
-                    </ProtectedRoute>
+                    <SearchProvider>
+                        <ProtectedRoute>
+                            <Container element={element[8]}>
+                            </Container>
+                        </ProtectedRoute>
+                    </SearchProvider>
                 }
             />
             <Route path="/gestion/analyse" element={
-                <ProtectedRoute>
-
-                    <Container element={element[3]}>
-                    </Container>
-                </ProtectedRoute>
+                <SearchProvider>
+                    <ProtectedRoute>
+                        <Container element={element[3]}>
+                        </Container>
+                    </ProtectedRoute>
+                </SearchProvider>
             }/>
             <Route 
                 path="/ajouter/specialite" 
                 element={
-                    <ProtectedRoute>
-                        <Container element={element[6]}>
-                        </Container>
-                    </ProtectedRoute>
+                    <SearchProvider>
+                        <ProtectedRoute>
+                            <Container element={element[6]}></Container>
+                        </ProtectedRoute>
+                    </SearchProvider>
                 }
             />
             <Route path="/gestion/demande" element={
-                <ProtectedRoute>
-                    <Container element={element[4]}>
-                    </Container>
-                </ProtectedRoute>
+                <SearchProvider>
+                    <ProtectedRoute>
+                        <Container element={element[4]}>
+                        </Container>
+                    </ProtectedRoute>
+                </SearchProvider>
             }/>
             <Route 
                 path="/ajouter/utilisateur" 
                 element={
-                    <ProtectedRoute>
-                        <Container element={element[5]}>
-                        </Container>
-                    </ProtectedRoute>
+                    <SearchProvider>
+                        <ProtectedRoute>
+                            <Container element={element[5]}>
+                            </Container>
+                        </ProtectedRoute>
+                    </SearchProvider>
                 }
             />
             <Route 
                 path="/ajouter/analyse" 
                 element={
-                    <ProtectedRoute>
-                        <Container element={element[9]}>
-                        </Container>
-                    </ProtectedRoute>
+                    <SearchProvider>
+                        <ProtectedRoute>
+                            <Container element={element[9]}>
+                            </Container>
+                        </ProtectedRoute>
+                    </SearchProvider>
                 }
             />
             <Route 
@@ -206,7 +217,6 @@ function App() {
                 path="/register" 
                 element={
                     <ProtectedRoute>
-
                         <Register/>
                     </ProtectedRoute>
                 }

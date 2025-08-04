@@ -8,9 +8,7 @@
 .container-demande-analyse .demande-analyse-form{
 
 }
-.container-demande-analyse .demande-analyse-form .input-label{
-    /* position: relative; */
-}
+
 .container-demande-analyse .demande-analyse-form .input-label label{
     color: rgba(6, 28, 73, 1);
 }

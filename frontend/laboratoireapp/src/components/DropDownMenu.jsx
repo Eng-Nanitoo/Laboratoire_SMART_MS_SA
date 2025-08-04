@@ -5,6 +5,7 @@ import './DropDownMenu.css';
 
 function DropDownMenu({Options,handleAnalyseOption}) {
     const [filtredOptions, setFilteredOptions] = useState({});
+    
     const filterOptions = (e) => {
         const inputFilterValue = e.target.value.toLowerCase();
         const filtered = Options.filter(option => option.toLowerCase().includes(inputFilterValue));

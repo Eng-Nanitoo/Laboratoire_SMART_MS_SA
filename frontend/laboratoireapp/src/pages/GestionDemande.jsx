@@ -1,6 +1,6 @@
 import './GestionDemande.css';
 import FilterSearchHeader from '../components/FilterSearchHeader';
-import Pagination from '../Pagination';
+import Pagination from "../components/Pagination";
 
 function GestionDemande() {
     return (

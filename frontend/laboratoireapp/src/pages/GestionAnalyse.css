@@ -34,3 +34,45 @@
 }
 
 
+
+
+@keyframes rowFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+tbody tr {
+  animation: rowFadeIn 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+  transition: background-color 0.2s, box-shadow 0.2s;
+}
+
+tbody tr.updated {
+    animation: rowFadeIn 0.4s cubic-bezier(0.23, 1, 0.32, 1), highlightRow 1s;
+}
+
+@keyframes highlightRow {
+    0% { background-color: #e8e8e8; }
+    100% { background-color: transparent; }
+}
+
+@keyframes rowFadeOut {
+    from {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+}
+
+tbody tr.row-fadeout {
+    animation: rowFadeOut 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    pointer-events: none;
+}
